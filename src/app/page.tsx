@@ -1,3 +1,4 @@
+import PostList from "@/components/post/List";
 import { getPosts } from "@/services/post";
 
 async function RootPage() {
@@ -5,10 +6,7 @@ async function RootPage() {
 
   return (
     <>
-      {posts.length &&
-        posts.map((post) => {
-          return <div key={post.slug}>{post.title}</div>;
-        })}
+      <PostList postList={posts} />
     </>
   );
 }
