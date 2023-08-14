@@ -59,3 +59,12 @@ export const getPosts = async (): Promise<Post[]> => {
     return 0;
   });
 };
+
+export const getPost = async (slug: string) => {
+  const posts = await getPosts();
+  const postIndex = posts.findIndex((post) => post?.slug === slug);
+
+  return {
+    post: posts[postIndex],
+  };
+};
