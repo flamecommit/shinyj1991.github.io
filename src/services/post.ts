@@ -42,7 +42,7 @@ const parsePost = async (postPath: string): Promise<Post> => {
   };
 };
 
-export const getPosts = async (): Promise<Post[]> => {
+export const getPostList = async (): Promise<Post[]> => {
   const postPaths: string[] = sync(`${POSTS_PATH}/**/*.mdx`);
   const result = await Promise.all(
     postPaths.map((postPath) => {
@@ -61,10 +61,10 @@ export const getPosts = async (): Promise<Post[]> => {
 };
 
 export const getPost = async (slug: string) => {
-  const posts = await getPosts();
-  const postIndex = posts.findIndex((post) => post?.slug === slug);
+  const postList = await getPostList();
+  const postIndex = postList.findIndex((post) => post?.slug === slug);
 
   return {
-    post: posts[postIndex],
+    post: postList[postIndex],
   };
 };

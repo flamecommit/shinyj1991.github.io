@@ -1,4 +1,4 @@
-import { getPost, getPosts } from "@/services/post";
+import { getPost, getPostList } from "@/services/post";
 import PostViewer from "@/components/post/Viewer";
 
 type Props = {
@@ -8,9 +8,9 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
+  const postList = await getPostList();
 
-  return posts.map((post) => ({
+  return postList.map((post) => ({
     slug: post.slug,
   }));
 }
