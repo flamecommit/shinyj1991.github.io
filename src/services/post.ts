@@ -4,6 +4,7 @@ import { sync } from "glob";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
+import { transformImgSrc } from "./mdx";
 
 const BASE_PATH = "/contents/posts";
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
@@ -29,7 +30,7 @@ const parsePost = async (postPath: string): Promise<Post> => {
     .replace("/index.mdx", "");
   const mdx = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [],
+      remarkPlugins: [[transformImgSrc, { slug, path: POSTS_PATH }]],
       rehypePlugins: [],
       format: "mdx",
     },
